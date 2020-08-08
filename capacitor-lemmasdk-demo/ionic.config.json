@@ -1,0 +1,7 @@
+{
+  "name": "capacitor-lemmasdk-demo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">lemmasdk-demo</string>
+    <string name="title_activity_main">lemmasdk-demo</string>
+    <string name="package_name">com.lamma.lemmasdkcapdemo</string>
+    <string name="custom_url_scheme">com.lamma.lemmasdkcapdemo</string>
+</resources>

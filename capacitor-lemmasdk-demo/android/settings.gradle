@@ -1,0 +1,8 @@
+include ':app'
+include ':capacitor-cordova-android-plugins'
+project(':capacitor-cordova-android-plugins').projectDir = new File('./capacitor-cordova-android-plugins/')
+
+include ':lemmavideosdk'
+project(':lemmavideosdk').projectDir = new File('../node_modules/capacitor-lemmasdk/android/lemmavideosdk')
+
+apply from: 'capacitor.settings.gradle'
