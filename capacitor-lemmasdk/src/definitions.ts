@@ -1,4 +1,4 @@
-declare module '@capacitor/core' {
+declare module global {
   interface PluginRegistry {
     LemmaSDK: LemmaSDKPlugin;
   }
@@ -25,7 +25,9 @@ export enum AdPosition {
 
 export interface AdOptions {
   pubId: string;       // Publisher id (required)
-  adUnitId: string;       // Adunit id (required)
+  adUnitId?: string;       // Adunit id (required)
+
+  baseServerURL?: string;
   
   position?: AdPosition;
   width?: number;

@@ -18,6 +18,3 @@ export class LemmaSDKWeb extends WebPlugin implements LemmaSDKPlugin {
 const LemmaSDK = new LemmaSDKWeb();
 
 export { LemmaSDK };
-
-import { registerWebPlugin } from '@capacitor/core';
-registerWebPlugin(LemmaSDK);
