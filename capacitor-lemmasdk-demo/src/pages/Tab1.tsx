@@ -16,8 +16,8 @@ class Tab1 extends Component {
   showTabBarBanner() {
 
       const options: AdOptions = {
-      pubId: 'pubid-xxx',
-      adUnitId: 'adunit-xxx'
+        pubId: '1',
+        adUnitId: '3100',
       };
 
       LemmaSDK.showVideoAd(options)
@@ -25,13 +25,20 @@ class Tab1 extends Component {
         async (value: any) => {
           console.log(value);  // true
           await Toast.show({
-            text: 'Showing Banner AD.'
+            text: 'Showing Lemma Video Ad.'
           })
         },
         (error: any) => {
           console.error(error); // show error
         }
       );
+
+
+      // Subscibe Banner Event Listener
+      LemmaSDK.addListener('onAdEvent', async (info: any) => {
+        console.log('onAdEvent Ad. -> '+JSON.stringify(info));
+      });
+
   }
 
   render() {

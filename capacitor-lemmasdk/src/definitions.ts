@@ -1,3 +1,5 @@
+import { PluginListenerHandle } from '@capacitor/core';
+
 declare module global {
   interface PluginRegistry {
     LemmaSDK: LemmaSDKPlugin;
@@ -15,6 +17,12 @@ export interface LemmaSDKPlugin {
 
   // Destroy the video, remove it from screen.
   removeVideoAd(): Promise<{ value: boolean }>;
+
+
+  addListener(eventName: 'onAdEvent', listenerFunc: (info: any) => void): PluginListenerHandle;
+
+  addListener(eventName: 'onAdError', listenerFunc: (info: any) => void): PluginListenerHandle;
+
 }
 
 export enum AdPosition {
@@ -25,7 +33,7 @@ export enum AdPosition {
 
 export interface AdOptions {
   pubId: string;       // Publisher id (required)
-  adUnitId?: string;       // Adunit id (required)
+  adUnitId: string;       // Adunit id (required)
 
   baseServerURL?: string;
   
