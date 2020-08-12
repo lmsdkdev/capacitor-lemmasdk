@@ -1,6 +1,7 @@
 package com.lemma.plugins.lemmasdk;
 
 import android.Manifest;
+import android.os.Looper;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -70,6 +71,9 @@ public class LemmaSDK extends Plugin {
 
         String adUnitId  = call.getString("adUnitId");
         String pubId = call.getString("pubId");
+        final int height = call.getInt("height", 250);
+        final int width = call.getInt("width",RelativeLayout.LayoutParams.MATCH_PARENT);
+        final int bottomMargin = call.getInt("bottomMargin",0);
         final String baseServerURL = call.getString("baseServerURL");
 
         if (adUnitId == null || pubId == null) {
@@ -84,14 +88,18 @@ public class LemmaSDK extends Plugin {
                 mAdViewLayout.setHorizontalGravity(Gravity.CENTER_HORIZONTAL);
                 mAdViewLayout.setGravity(Gravity.BOTTOM);
 
-
                 float density = getContext().getResources().getDisplayMetrics().density;
+                int finalWidth = width;
 
+                if (finalWidth != RelativeLayout.LayoutParams.MATCH_PARENT ){
+                    finalWidth = (int)(finalWidth * density);
+                }
                 final CoordinatorLayout.LayoutParams mAdViewLayoutParams = new CoordinatorLayout.LayoutParams(
-                        RelativeLayout.LayoutParams.MATCH_PARENT,
-                        (int)(250 * density)
+                        finalWidth,
+                        (int)(height * density)
                 );
-                mAdViewLayoutParams.gravity = Gravity.BOTTOM;
+                mAdViewLayoutParams.gravity = Gravity.BOTTOM | Gravity.CENTER;
+                mAdViewLayoutParams.bottomMargin  = (int)(bottomMargin * density);
                 mAdViewLayout.setLayoutParams(mAdViewLayoutParams);
                 mViewGroup.addView(mAdViewLayout);
 

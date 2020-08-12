@@ -25,19 +25,13 @@ export interface LemmaSDKPlugin {
 
 }
 
-export enum AdPosition {
-  TOP_CENTER = 'TOP_CENTER',
-  CENTER = 'CENTER',
-  BOTTOM_CENTER = 'BOTTOM_CENTER',
-}
 
 export interface AdOptions {
   pubId: string;       // Publisher id (required)
   adUnitId: string;       // Adunit id (required)
 
   baseServerURL?: string;
-  
-  position?: AdPosition;
   width?: number;
   height?: number;
+  bottomMargin?: number;
 }

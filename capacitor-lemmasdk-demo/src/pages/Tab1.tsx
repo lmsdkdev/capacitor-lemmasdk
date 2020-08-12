@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonButton, IonCardContent } from '@ionic/react';
 import { Plugins } from '@capacitor/core';
-import { AdOptions, AdPosition } from 'capacitor-lemmasdk';
+import { AdOptions } from 'capacitor-lemmasdk';
 import './Tab1.css';
 const { LemmaSDK, Toast } = Plugins;
 
@@ -9,15 +9,17 @@ class Tab1 extends Component {
   constructor(props: any) {
     super(props);
     this.state = {};
-    LemmaSDK.initialize({'pubId':'ca-app-pub-3940256099942544~3347511713'});
+    LemmaSDK.initialize({});
   }
 
   // This Banner AD have bottom margin to avoid TabBar Overlaping for TabBar 
-  showTabBarBanner() {
+  showVideoAd() {
 
       const options: AdOptions = {
         pubId: '1',
         adUnitId: '3100',
+        height: 160,
+        bottomMargin:64 
       };
 
       LemmaSDK.showVideoAd(options)
@@ -39,6 +41,26 @@ class Tab1 extends Component {
         console.log('onAdEvent Ad. -> '+JSON.stringify(info));
       });
 
+       // Subscibe Banner Event Listener
+      LemmaSDK.addListener('onAdError', async (info: any) => {
+        console.log('onAdError Ad. -> '+JSON.stringify(info));
+      });
+
+  }
+
+  removeVideoAd() {
+    LemmaSDK.removeVideoAd({})
+      .then(
+        async (value: any) => {
+          console.log(value);  // true
+          await Toast.show({
+            text: 'Removed Lemma Video Ad.'
+          })
+        },
+        (error: any) => {
+          console.error(error); // show error
+        }
+      );
   }
 
   render() {
@@ -46,20 +68,20 @@ class Tab1 extends Component {
       <IonPage>
         <IonHeader>
           <IonToolbar color="dark">
-            <IonTitle>Banner Ads</IonTitle>
+            <IonTitle>Lemma Video Ad</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonContent className="ion-padding">
           <IonHeader collapse="condense">
             <IonToolbar>
-              <IonTitle size="large">Banner Ads</IonTitle>
+              <IonTitle size="large">Video Ads</IonTitle>
             </IonToolbar>
           </IonHeader>
           <IonCard>
-            <IonCardContent>Banner Ad is usually shown by default on bottom of the page. You can select the position as you like.
-      You can even display multiple banner ads per page.</IonCardContent>
+            <IonCardContent>Video ad will shown at the bottomt of the page.</IonCardContent>
           </IonCard>
-          <IonButton expand="block" className="ion-margin-bottom" color="success" onClick={this.showTabBarBanner}>Show Banner Ad</IonButton>
+          <IonButton expand="block" className="ion-margin-bottom" color="success" onClick={this.showVideoAd}>Show Video Ad</IonButton>
+          <IonButton expand="block" className="ion-margin-bottom" color="warning" onClick={this.removeVideoAd}>Remove Banner Ad</IonButton>
         </IonContent>
       </IonPage>
     );
