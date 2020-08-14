@@ -69,8 +69,8 @@ public class LemmaSDK extends Plugin {
     @PluginMethod()
     public void showVideoAd(final PluginCall call) {
 
-        String adUnitId  = call.getString("adUnitId");
-        String pubId = call.getString("pubId");
+        final String adUnitId  = call.getString("adUnitId");
+        final String pubId = call.getString("pubId");
         final int height = call.getInt("height", 250);
         final int width = call.getInt("width",RelativeLayout.LayoutParams.MATCH_PARENT);
         final int bottomMargin = call.getInt("bottomMargin",0);
@@ -105,7 +105,7 @@ public class LemmaSDK extends Plugin {
 
 
                 Log.d("lm-showVideoAd",call.toString());
-                LMAdRequest adRequest = new LMAdRequest("1", "3100");
+                LMAdRequest adRequest = new LMAdRequest(pubId,adUnitId);
                 if (baseServerURL !=null && baseServerURL.length() > 0){
                     adRequest.setAdServerBaseURL(baseServerURL);
                 }
@@ -145,9 +145,11 @@ public class LemmaSDK extends Plugin {
                     public void run() {
                         if (mAdViewLayout != null) {
                             mViewGroup.removeView(mAdViewLayout);
-                            mVAdManager.destroy();
-                            mVAdManager = null;
-                            Log.d(getLogTag(), "Video ad Removed");
+                            if(mVAdManager != null ) {
+                                mVAdManager.destroy();
+                                mVAdManager = null;
+                                Log.d(getLogTag(), "Video ad Removed");
+                            }
                         }
                     }
                 });

@@ -16,8 +16,8 @@ class Tab1 extends Component {
   showVideoAd() {
 
       const options: AdOptions = {
-        pubId: '1',
-        adUnitId: '3100',
+        pubId: '181',
+        adUnitId: '5034',
         height: 160,
         bottomMargin:64 
       };
