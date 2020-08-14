@@ -81,7 +81,7 @@ class Tab1 extends Component {
             <IonCardContent>Video ad will shown at the bottomt of the page.</IonCardContent>
           </IonCard>
           <IonButton expand="block" className="ion-margin-bottom" color="success" onClick={this.showVideoAd}>Show Video Ad</IonButton>
-          <IonButton expand="block" className="ion-margin-bottom" color="warning" onClick={this.removeVideoAd}>Remove Banner Ad</IonButton>
+          <IonButton expand="block" className="ion-margin-bottom" color="warning" onClick={this.removeVideoAd}>Remove Video Ad</IonButton>
         </IonContent>
       </IonPage>
     );
